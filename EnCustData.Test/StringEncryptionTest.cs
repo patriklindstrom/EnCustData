@@ -13,14 +13,31 @@ namespace EnCustData.Test
     public void EncryptAndDecryptAString( )
     {
         //Arrange
-        string passPhrase = "Ni_talar_bra_latin";
+        const string passPhrase = "Ni_talar_bra_latin";
         // http://www.hollyfame.com/top-10-greatest-kept-hollywood-secrets-of-all-time/10/
-        string secretString = "Most Pop Stars Lip-sync Onstage";
-
+        const string secretString = "Most Pop Stars Lip-sync Onstage";
+        string encryptedStr;
+        string decryptedStr;
         //Act
-
+       encryptedStr= AESGCM.SimpleEncryptWithPassword(password: passPhrase, secretMessage: secretString);
+        decryptedStr = AESGCM.SimpleDecryptWithPassword(encryptedMessage: encryptedStr, password: passPhrase);
         //Assert
-
+        Assert.AreEqual(secretString, decryptedStr, "String should be same after decryption.");
+    }
+     [Test]
+    public void EncryptAndDecryptAStringUTF()
+    {
+        //Arrange
+        const string passPhrase = "كنت أتكلم جيد اللاتينية";
+        // http://www.hollyfame.com/top-10-greatest-kept-hollywood-secrets-of-all-time/10/
+        const string secretString = "معظم البوب نجوم الشفاه مزامنة على خشبة المسرح";
+        string encryptedStr;
+        string decryptedStr;
+        //Act
+        encryptedStr = AESGCM.SimpleEncryptWithPassword(password: passPhrase, secretMessage: secretString);
+        decryptedStr = AESGCM.SimpleDecryptWithPassword(encryptedMessage: encryptedStr, password: passPhrase);
+        //Assert
+        Assert.AreEqual(secretString, decryptedStr, "String should be same after decryption.");
     }
     }
 }
