@@ -40,7 +40,7 @@ namespace EnCustData
         private static List<EncryptedField> RemoveAllFaxNumbersEtcFromOrg(string sqlconTargetData, string passW,
             Boolean makeUpdate)
         {
-            const string GET_ALL_ROWS = "SELECT OrganizationContactId,ContactName FROM clo_OrganizationContact_TB";
+            const string GET_ALL_ROWS = "SELECT top 10 OrganizationContactId,ContactName FROM clo_OrganizationContact_TB";
             const string SEARCH_ROW =
                 @"SELECT OrganizationContactId,ContactName FROM [dbo].[clo_OrganizationContact_TB] 
                                     WHERE [OrganizationContactId] = @OrganizationContactId ;";
